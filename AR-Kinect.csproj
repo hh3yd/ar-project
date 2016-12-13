@@ -82,7 +82,8 @@
     <Compile Include="Assets\KinectView\Scripts\InfraredSourceManager.cs" />
     <Compile Include="Assets\KinectView\Scripts\InfraredSourceView.cs" />
     <Compile Include="Assets\KinectView\Scripts\MultiSourceManager.cs" />
-    <Compile Include="Assets\Movement_Tracker.cs" />
+    <Compile Include="Assets\Scripts\Move_Objects.cs" />
+    <Compile Include="Assets\Scripts\Movement_Tracker.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
