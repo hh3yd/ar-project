@@ -1,22 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Windows.Kinect;
-
+using System.IO;
 public class Movement_Tracker : MonoBehaviour {
     public Transform movementObject1;
     public Transform movementObject2;
     public Windows.Kinect.JointType partToTrack1;
     public Windows.Kinect.JointType partToTrack2;
-    public float posFactor = 2;
+    public float posFactor = 20;
     public float lowPassFactor = 0.1F;
     private Vector3 currentPos1;
     private Vector3 currentPos2;
     BodySourceManager bodySourceManager;
-
+    StreamWriter sw;
     // Use this for initialization
     void Start () {
+        
         bodySourceManager = GetComponent<BodySourceManager>();
-	}
+        sw = new StreamWriter(@"D:\text.txt");
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -24,10 +27,10 @@ public class Movement_Tracker : MonoBehaviour {
 	}
     void FixedUpdate()
     {
-        if(bodySourceManager == null)
-        {
-            return;
-        }
+            if (bodySourceManager == null)
+            {
+                return;
+            }
 
         Windows.Kinect.Body[] data = bodySourceManager.GetData();
         if (data == null)
@@ -50,22 +53,27 @@ public class Movement_Tracker : MonoBehaviour {
             if (body.IsTracked)
             {
                 var pos = body.Joints[partToTrack1].Position;
-                CalcLowPassValues(new Vector3(pos.X, pos.Y, -pos.Z), ref currentPos1);
+                movementObject1.position = new Vector3(pos.X,pos.Y,-pos.Z);
 
-                movementObject1.position = currentPos1 * posFactor;
+                sw.Write("Left: ");
+                sw.WriteLine(movementObject1.position.ToString());
 
                 pos = body.Joints[partToTrack2].Position;
-                CalcLowPassValues(new Vector3(pos.X, pos.Y, -pos.Z), ref currentPos2);
+                movementObject2.position = new Vector3(pos.X, pos.Y, -pos.Z);
 
-                movementObject2.position = currentPos2 * posFactor;
+                sw.Write("Right: ");
+                sw.WriteLine(movementObject2.position.ToString());
 
                 break;
             }
         }
+        
     }
-
-    void CalcLowPassValues(Vector3 newPos, ref Vector3 resultPos)
+    void OnApplicationQuit()
     {
-        resultPos = Vector3.Lerp(resultPos, newPos, lowPassFactor);
+        if (sw != null)
+        {
+            sw.Close();
+        }
     }
 }
