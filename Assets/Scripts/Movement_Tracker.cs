@@ -7,8 +7,8 @@ public class Movement_Tracker : MonoBehaviour {
     public Transform movementObject2;
     public Windows.Kinect.JointType partToTrack1;
     public Windows.Kinect.JointType partToTrack2;
-    public float posFactor = 20;
-    public float lowPassFactor = 0.1F;
+    private float posFactor = 20;
+    //public float lowPassFactor = 0.1F;
     private Vector3 currentPos1;
     private Vector3 currentPos2;
     BodySourceManager bodySourceManager;
