@@ -7,10 +7,7 @@ public class Movement_Tracker : MonoBehaviour {
     public Transform movementObject2;
     public Windows.Kinect.JointType partToTrack1;
     public Windows.Kinect.JointType partToTrack2;
-    private float posFactor = 20;
-    //public float lowPassFactor = 0.1F;
-    private Vector3 currentPos1;
-    private Vector3 currentPos2;
+    private float posFactor = 10;
     BodySourceManager bodySourceManager;
     StreamWriter sw;
     // Use this for initialization
