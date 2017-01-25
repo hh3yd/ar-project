@@ -53,13 +53,13 @@ public class Movement_Tracker : MonoBehaviour {
             if (body.IsTracked)
             {
                 var pos = body.Joints[partToTrack1].Position;
-                movementObject1.position = new Vector3(pos.X,pos.Y,-pos.Z);
+                movementObject1.position = new Vector3(pos.X,pos.Y,-pos.Z)*posFactor;
 
                 sw.Write("Left: ");
                 sw.WriteLine(movementObject1.position.ToString());
 
                 pos = body.Joints[partToTrack2].Position;
-                movementObject2.position = new Vector3(pos.X, pos.Y, -pos.Z);
+                movementObject2.position = new Vector3(pos.X, pos.Y, -pos.Z)*posFactor;
 
                 sw.Write("Right: ");
                 sw.WriteLine(movementObject2.position.ToString());
