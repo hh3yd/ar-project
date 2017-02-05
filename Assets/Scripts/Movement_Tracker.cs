@@ -4,17 +4,17 @@ using Windows.Kinect;
 using System.IO;
 public class Movement_Tracker : MonoBehaviour {
     public Transform movementObject1;
-    public Transform movementObject2;
+    //public Transform movementObject2;
     public Windows.Kinect.JointType partToTrack1;
     public Windows.Kinect.JointType partToTrack2;
     private float posFactor = 10;
     BodySourceManager bodySourceManager;
-    StreamWriter sw;
+    //StreamWriter sw;
     // Use this for initialization
     void Start () {
         
         bodySourceManager = GetComponent<BodySourceManager>();
-        sw = new StreamWriter(@"D:\text.txt");
+        //sw = new StreamWriter(@"D:\text.txt");
 
     }
 	
@@ -30,6 +30,7 @@ public class Movement_Tracker : MonoBehaviour {
             }
 
         Windows.Kinect.Body[] data = bodySourceManager.GetData();
+        
         if (data == null)
         {
             return;
@@ -49,18 +50,19 @@ public class Movement_Tracker : MonoBehaviour {
 
             if (body.IsTracked)
             {
-                var pos = body.Joints[partToTrack1].Position;
-                movementObject1.position = new Vector3(pos.X,pos.Y,-pos.Z)*posFactor;
+                var pos_elbow = body.Joints[partToTrack1].Position;
+                movementObject1.position = new Vector3(pos_elbow.X, pos_elbow.Y,-pos_elbow.Z)*posFactor;
+                
+                //sw.Write("Left: ");
+                //sw.WriteLine(movementObject1.position.ToString());
 
-                sw.Write("Left: ");
-                sw.WriteLine(movementObject1.position.ToString());
-
-                pos = body.Joints[partToTrack2].Position;
-                movementObject2.position = new Vector3(pos.X, pos.Y, -pos.Z)*posFactor;
-
-                sw.Write("Right: ");
-                sw.WriteLine(movementObject2.position.ToString());
-
+                var pos_hand = body.Joints[partToTrack2].Position;
+                Vector3 pos_hand_vec = new Vector3(pos_hand.X, pos_hand.Y, -pos_hand.Z) * posFactor;
+                Vector3 targetDir = pos_hand_vec - movementObject1.position;
+                float step = posFactor * Time.deltaTime;
+                Vector3 newDir = Vector3.RotateTowards(movementObject1.position, targetDir, step, 0.0F);
+                Debug.DrawRay(transform.position, newDir, Color.red);
+                movementObject1.rotation = Quaternion.LookRotation(newDir);
                 break;
             }
         }
@@ -68,9 +70,9 @@ public class Movement_Tracker : MonoBehaviour {
     }
     void OnApplicationQuit()
     {
-        if (sw != null)
+        /*if (sw != null)
         {
             sw.Close();
-        }
+        }*/
     }
 }
