@@ -59,10 +59,16 @@ public class Movement_Tracker : MonoBehaviour {
                 var pos_hand = body.Joints[partToTrack2].Position;
                 Vector3 pos_hand_vec = new Vector3(pos_hand.X, pos_hand.Y, -pos_hand.Z) * posFactor;
                 Vector3 targetDir = pos_hand_vec - movementObject1.position;
-                float step = posFactor * Time.deltaTime;
-                Vector3 newDir = Vector3.RotateTowards(movementObject1.position, targetDir, step, 0.0F);
-                Debug.DrawRay(transform.position, newDir, Color.red);
-                movementObject1.rotation = Quaternion.LookRotation(newDir);
+                Quaternion rotation = Quaternion.LookRotation(targetDir);
+
+                rotation *= movementObject1.rotation;
+                
+                //float step = posFactor * Time.deltaTime;
+                //Vector3 newDir = Vector3.RotateTowards(movementObject1.position, targetDir, step, 0.0F);
+                //Debug.DrawRay(transform.position, newDir, Color.red);
+                //movementObject1.rotation = Quaternion.LookRotation(newDir);
+                movementObject1.rotation = rotation;
+                
                 break;
             }
         }

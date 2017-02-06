@@ -60,7 +60,31 @@ public class MultiSourceManager : MonoBehaviour {
                     var depthFrame = frame.DepthFrameReference.AcquireFrame();
                     if (depthFrame != null)
                     {
+                        /*ColorFrameSource cds = _Sensor.ColorFrameSource;
+                        for (int k = 0; k < cds.FrameDescription.Width; k++)
+                        {
+                            for(int i = 0; i< cds.FrameDescription.Height; i++)
+                            {
+                                _ColorData[k]
+                            }
+                        }*/
                         colorFrame.CopyConvertedFrameDataToArray(_ColorData, ColorImageFormat.Rgba);
+                        for(int i = 0; i< _ColorData.Length; i+= (int)colorFrame.FrameDescription.BytesPerPixel)
+                        {
+                            if(_ColorData[i]< 0x46 && _ColorData[i+1] > 0xCD && _ColorData[i+2]< 0x46){
+                                _ColorData[i] = 0xFF;
+                                _ColorData[i] = 0xFF;
+                                _ColorData[i] = 0xFF;
+                            }
+                            else
+                            {
+                                _ColorData[i] = 0x00;
+                                _ColorData[i] = 0x00;
+                                _ColorData[i] = 0x00;
+                            }
+
+                        }
+
                         _ColorTexture.LoadRawTextureData(_ColorData);
                         _ColorTexture.Apply();
                         
