@@ -7,8 +7,12 @@ public class Move_Objects : MonoBehaviour {
     public float mSpeed;
     private int count;
     public Text countText;
+    private GameObject panel;
     void Start()
-    {   
+    {
+        panel = GameObject.Find("GameOverPanel");
+        panel.SetActive(false);
+        PlayerPrefs.SetString("timer", "true");
         count = 0;
         SetCountText();
     }
@@ -27,26 +31,21 @@ public class Move_Objects : MonoBehaviour {
             transform.Rotate(Vector3.left);
         }
         
-        //rb.AddForce(mv * mSpeed);
         transform.Translate(mSpeed*moveHorizontal * Time.deltaTime, 0.0f,mSpeed* moveVertical * Time.deltaTime);
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Tree"))
-        {/*
-            Renderer r = other.GetComponent<Renderer>();
-            Color col = r.material.color.linear;
-
-            col.r = r.material.color.r+1.0f;
-            r.material.SetColor("test",col);*/
-            //r.material.shader.
+        {
             count++;
             SetCountText();
             if (count == 5)
             {
-
-                other.gameObject.SetActive(false);
+                
                 //show win panel
+                panel.SetActive(true);
+                PlayerPrefs.SetString("timer", "false");
+                GameObject.Find("axe3").SetActive(false);
             }
             
         }
@@ -54,6 +53,7 @@ public class Move_Objects : MonoBehaviour {
     private void SetCountText()
     {
         countText.text = "Score: " + count.ToString();
+        PlayerPrefs.SetInt("CurrentScore", count);
     }
 
 }

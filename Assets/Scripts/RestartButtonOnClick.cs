@@ -8,6 +8,7 @@ public class RestartButtonOnClick : MonoBehaviour
     public void LoadStage()
     {
         //Application.LoadLevel("Score");
-        SceneManager.LoadScene("Score");
+        //PlayerPrefs.SetString("timer", "true");
+        SceneManager.LoadScene("DestroyTower");
     }
 }

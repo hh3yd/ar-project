@@ -5,6 +5,6 @@ public class PlayGameOnClick : MonoBehaviour {
 
     public void LoadStage()
     {
-        Application.LoadLevel("Score");
+        Application.LoadLevel("DestroyTower");
     }
 }

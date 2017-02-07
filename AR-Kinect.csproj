@@ -93,14 +93,18 @@
     <Compile Include="Assets\KinectView\Scripts\InfraredSourceManager.cs" />
     <Compile Include="Assets\KinectView\Scripts\InfraredSourceView.cs" />
     <Compile Include="Assets\KinectView\Scripts\MultiSourceManager.cs" />
+    <Compile Include="Assets\Scripts\EndScoreScript.cs" />
     <Compile Include="Assets\Scripts\Move_Objects.cs" />
     <Compile Include="Assets\Scripts\Movement_Tracker.cs" />
     <Compile Include="Assets\Scripts\PlayGameOnClick.cs" />
     <Compile Include="Assets\Scripts\QuitOnClick.cs" />
+    <Compile Include="Assets\Scripts\RestartButtonOnClick.cs" />
+    <Compile Include="Assets\Scripts\ScoreScript.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\Tree_Collider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Fonts\gluk_glametrix\OFL_License.txt" />
     <None Include="Assets\GreenScreen\Materials\GreenScreenShader.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

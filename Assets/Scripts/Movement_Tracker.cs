@@ -55,48 +55,8 @@ public class Movement_Tracker : MonoBehaviour {
                 Vector3 dir = right_Hand - left_Hand;
                 Quaternion q = Quaternion.LookRotation(dir);
                 movementObject1.rotation = q;
-
-
-                //dir.Normalize();
-                //Debug.Log(old_dir);
-                //Debug.Log(dir);
-                //Quaternion rotation = Quaternion.Euler(dir);
-                //Debug.Log(q);
-                //movementObject2.rotation = q;
+                movementObject1.position = right_Hand*30;
                 
-                /*Vector3 proj_xy = Vector3.ProjectOnPlane(dir, Vector3.forward);
-                float drehung_z = Vector3.Angle(Vector3.right, proj_xy);
-
-                Vector3 proj_xz = Vector3.ProjectOnPlane(dir, Vector3.up);
-                float drehung_y = Vector3.Angle(Vector3.forward, proj_xz);
-
-                Vector3 proj_yz = Vector3.ProjectOnPlane(dir, Vector3.right);
-                float drehung_x = Vector3.Angle(Vector3.up, proj_yz);
-
-                float y_angle = Vector3.Angle(dir, movementObject1.position);
-                float x_angle = Vector3.Angle(dir, movementObject1.position);
-                float z_angle = Vector3.Angle(dir, movementObject1.position);
-                
-                //dir.z = -dir.z;
-                float x_angle = Vector3.Angle(Vector3.up, dir);
-                float y_angle = Vector3.Angle(Vector3.right, dir);
-                float z_angle = Vector3.Angle(Vector3.forward, dir);
-                //Rotation um die Z-Achse ist die 
-                //Winkel zur XAchse von der Dir
-                */
-                //Quaternion q2 = new Quaternion(drehung_x, drehung_y, drehung_z, 0);
-                //Vector3 pos_2_vec = new Vector3(pos_2.X, pos_2.Y, pos_2.Z) * posFactor;
-                //Vector3 targetDir = pos_2_vec - movementObject1.position;
-                //Quaternion rotation = Quaternion.LookRotation(targetDir);
-
-                //rotation *= movementObject1.rotation;
-
-                //float step = posFactor * Time.deltaTime;
-                //Vector3 newDir = Vector3.RotateTowards(movementObject1.position, targetDir, step, 0.0F);
-                //Debug.DrawRay(transform.position, newDir, Color.red);
-                //movementObject1.rotation = Quaternion.LookRotation(newDir);
-
-
                 break;
             }
         }
