@@ -2,27 +2,41 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour {
+public class Timer : MonoBehaviour
+{
 
     public Text counterText;
 
     public float seconds, minutes;
     public float timeLeft;
 
-	// Use this for initialization
-	void Start () {
-        counterText = GetComponent<Text>() as Text;
+    public float score;
+
+    private GameObject panel;
+    private bool over = false;
+
+    // Use this for initialization
+    void Start()
+    {
+        panel = GameObject.Find("GameOverPanel");
+        panel.SetActive(false);
+        counterText = GetComponent<Text>() as Text;        
         setCounterText();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         timeLeft -= Time.deltaTime;
         setCounterText();
         if (timeLeft < 0)
         {
             timeLeft = 0;
-            // TODO: Game over ?
+            if (!over)
+            {
+                over = true;
+                panel.SetActive(true);                
+            }
         }
     }
 
