@@ -16,6 +16,17 @@ public class Move_Objects : MonoBehaviour {
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
+        bool w= Input.GetKey("w");
+        if(w)
+        {
+            transform.Rotate(Vector3.up);
+        }
+        bool a = Input.GetKey("a");
+        if (a)
+        {
+            transform.Rotate(Vector3.left);
+        }
+        
         //rb.AddForce(mv * mSpeed);
         transform.Translate(mSpeed*moveHorizontal * Time.deltaTime, 0.0f,mSpeed* moveVertical * Time.deltaTime);
     }
